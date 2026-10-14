@@ -42,7 +42,7 @@ function persist() {
   });
   return writeLock;
 }
-function json(res, body, status = 200) { const text = JSON.stringify(body); res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'content-type', 'Access-Control-Allow-Mbnbods': 'GET,POST,OPTIONS', 'Cache-Control': 'no-store' }); res.end(text); }
+function json(res, body, status = 200) { const text = JSON.stringify(body); res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'content-type', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Cache-Control': 'no-store' }); res.end(text); }
 function readBody(req) { return new Promise((resolve, reject) => { let data = ''; req.on('data', c => { data += c; if (data.length > 2_000_000) reject(new Error('BODY_TOO_LARGE')); }); req.on('end', () => { try { resolve(data ? JSON.parse(data) : {}); } catch { reject(new Error('INVALID_JSON')); } }); req.on('error', reject); }); }
 function fail(message, status = 400) { const e = new Error(message); e.status = status; throw e; }
 function sha256Hex(value) { return crypto.createHash('sha256').update(value).digest('hex'); }
@@ -65,12 +65,12 @@ function coinbaseCount() { return chain.reduce((n, b) => n + (b.transactions || 
 function reward() { const issued = chain.reduce((n, b) => n + (b.transactions || []).filter(x => x.type === 'coinbase').reduce((m, x) => m + Number(x.amount || 0), 0), 0); const r = INITIAL_REWARD / (2 ** Math.floor(coinbaseCount() / HALVING_INTERVAL)); return Math.max(0, Math.min(r, MAX_SUPPLY - issued)); }
 function miningStatus() { const tip = chain.at(-1); const next = tip.index === 0 ? initialAvailableAt : (Number(tip.timestamp) + MINING_INTERVAL_MS); return { ok: true, height: tip.index, next_available_at: next, remaining_ms: Math.max(0, next - Date.now()), ready: Date.now() >= next, interval_minutes: 10, miner_mode: 'single' }; }
 async function handle(req, res) {
-  if (req.mbnbod === 'OPTIONS') return json(res, { ok: true });
+  if (req.method === 'OPTIONS') return json(res, { ok: true });
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   try {
-    if (req.mbnbod === 'GET' && url.pathname === '/api/chain') return json(res, { ok: true, chain, pending });
-    if (req.mbnbod === 'GET' && url.pathname === '/api/mining-status') return json(res, miningStatus());
-    if (req.mbnbod === 'POST' && url.pathname === '/api/transfer') {
+    if (req.method === 'GET' && url.pathname === '/api/chain') return json(res, { ok: true, chain, pending });
+    if (req.method === 'GET' && url.pathname === '/api/mining-status') return json(res, miningStatus());
+    if (req.method === 'POST' && url.pathname === '/api/transfer') {
       const { tx } = await readBody(req); validateTx(tx);
       const publicKey = b64(tx.publicKey, 'publicKey'), signature = b64(tx.signature, 'signature');
       if (publicKey.length !== ml_dsa44.lengths.publicKey || signature.length !== ml_dsa44.lengths.signature) fail('Invalid ML-DSA-44 key or signature length');
@@ -80,7 +80,7 @@ async function handle(req, res) {
       if (pending.some(x => x.nonce === tx.nonce)) fail('DUPLICATE_NONCE');
       pending.push(tx); await persist(); return json(res, { ok: true, status: 'pending' });
     }
-    if (req.mbnbod === 'POST' && url.pathname === '/api/mine') {
+    if (req.method === 'POST' && url.pathname === '/api/mine') {
       const body = await readBody(req), to = body.to, transactions = body.transactions;
       if (typeof to !== 'string' || !/^pqc1[A-Za-z0-9_-]+$/.test(to)) fail('INVALID_RECIPIENT');
       if (!Array.isArray(transactions) || transactions.some(x => x?.type === 'coinbase')) fail('INVALID_TRANSACTIONS');
