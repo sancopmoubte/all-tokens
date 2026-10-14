@@ -97,4 +97,4 @@ async function handle(req, res) {
     return json(res, { ok: false, error: 'NOT_FOUND' }, 404);
   } catch (e) { return json(res, { ok: false, error: e?.message || 'INTERNAL_ERROR' }, e?.status || 400); }
 }
-http.createServer(handle).listen(PORT, '127.0.0.1', () => conxmre.log(`XMR Oracle node listening on 127.0.0.1:${PORT}`));
+http.createServer(handle).listen(PORT, '127.0.0.1', () => console.log(`XMR Oracle node listening on 127.0.0.1:${PORT}`));
