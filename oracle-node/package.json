@@ -1,5 +1,5 @@
 {
-  "name": "eth-oracle-node",
+  "name": "bnb-oracle-node",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

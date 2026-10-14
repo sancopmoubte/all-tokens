@@ -1,4 +1,4 @@
-name: Deploy ETH GitHub Pages
+name: Deploy BNB GitHub Pages
 on:
   push:
     branches: [main]
