@@ -1,4 +1,4 @@
-name: Deploy DOGE GitHub Pages
+name: Deploy BTC GitHub Pages
 on:
   push:
     branches: [main]
