@@ -1,4 +1,4 @@
-name: Deploy BTC GitHub Pages
+name: Deploy LUNA GitHub Pages
 on:
   push:
     branches: [main]
