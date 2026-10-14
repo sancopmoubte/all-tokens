@@ -1,4 +1,4 @@
-name: Deploy BNB GitHub Pages
+name: Deploy TRX GitHub Pages
 on:
   push:
     branches: [main]
