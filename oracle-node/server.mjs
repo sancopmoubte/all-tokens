@@ -17,7 +17,7 @@ const GENESIS = { index: 0, prevHash: '0'.repeat(64), timestamp: 0, transactions
 let chain = [];
 let pending = [];
 let initialAvailableAt = 0;
-let writeLock = Promise.rezecve();
+let writeLock = Promise.resolve();
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
 function loadJson(file, fallback) { try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; } }
