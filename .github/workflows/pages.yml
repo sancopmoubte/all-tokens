@@ -1,4 +1,4 @@
-name: Deploy LUNA GitHub Pages
+name: Deploy PEPE GitHub Pages
 on:
   push:
     branches: [main]

@@ -4,8 +4,8 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { ml_dsa44 } from '@noble/post-quantum/ml-dsa.js';
 
-const PORT = Number(process.env.PORT || 8790);
-const DATA_DIR = process.env.DATA_DIR || '/var/lib/luna-node';
+const PORT = Number(process.env.PORT || 8791);
+const DATA_DIR = process.env.DATA_DIR || '/var/lib/pepe-node';
 const CHAIN_FILE = path.join(DATA_DIR, 'chain.json');
 const PENDING_FILE = path.join(DATA_DIR, 'pending.json');
 const SCHEDULE_FILE = path.join(DATA_DIR, 'schedule.json');
@@ -97,4 +97,4 @@ async function handle(req, res) {
     return json(res, { ok: false, error: 'NOT_FOUND' }, 404);
   } catch (e) { return json(res, { ok: false, error: e?.message || 'INTERNAL_ERROR' }, e?.status || 400); }
 }
-http.createServer(handle).listen(PORT, '127.0.0.1', () => console.log(`LUNA Oracle node listening on 127.0.0.1:${PORT}`));
+http.createServer(handle).listen(PORT, '127.0.0.1', () => console.log(`PEPE Oracle node listening on 127.0.0.1:${PORT}`));
