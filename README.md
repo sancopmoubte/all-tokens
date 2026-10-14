@@ -1,9 +1,9 @@
-# PEPE PEPE
+# SHIB SHIB
 
 独立的中心化区块链玩具项目，运行在 Oracle VM 节点上，GitHub Pages 提供静态网页。
 
-- 总发行上限：21,000,000 PEPE
-- 初始奖励：50 PEPE
+- 总发行上限：21,000,000 SHIB
+- 初始奖励：50 SHIB
 - 每 210,000 个 coinbase 区块减半
 - 出块间隔：10 分钟
 - 转账手续费：0

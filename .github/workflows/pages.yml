@@ -1,4 +1,4 @@
-name: Deploy PEPE GitHub Pages
+name: Deploy SHIB GitHub Pages
 on:
   push:
     branches: [main]
