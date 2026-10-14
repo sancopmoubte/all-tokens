@@ -1,5 +1,5 @@
 {
-  "name": "shib-oracle-node",
+  "name": "eth-oracle-node",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

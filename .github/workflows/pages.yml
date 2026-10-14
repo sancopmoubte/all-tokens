@@ -1,4 +1,4 @@
-name: Deploy SHIB GitHub Pages
+name: Deploy ETH GitHub Pages
 on:
   push:
     branches: [main]
