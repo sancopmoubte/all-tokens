@@ -1,5 +1,5 @@
 {
-  "name": "trx-oracle-node",
+  "name": "sol-oracle-node",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

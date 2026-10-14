@@ -1,4 +1,4 @@
-name: Deploy TRX GitHub Pages
+name: Deploy SOL GitHub Pages
 on:
   push:
     branches: [main]
