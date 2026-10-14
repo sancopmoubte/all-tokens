@@ -1,4 +1,4 @@
-name: Deploy ZEC GitHub Pages
+name: Deploy XMR GitHub Pages
 on:
   push:
     branches: [main]

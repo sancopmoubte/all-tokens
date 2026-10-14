@@ -4,8 +4,8 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { ml_dsa44 } from '@noble/post-quantum/ml-dsa.js';
 
-const PORT = Number(process.env.PORT || 8797);
-const DATA_DIR = process.env.DATA_DIR || '/var/lib/zec-node';
+const PORT = Number(process.env.PORT || 8798);
+const DATA_DIR = process.env.DATA_DIR || '/var/lib/xmr-node';
 const CHAIN_FILE = path.join(DATA_DIR, 'chain.json');
 const PENDING_FILE = path.join(DATA_DIR, 'pending.json');
 const SCHEDULE_FILE = path.join(DATA_DIR, 'schedule.json');
@@ -43,7 +43,7 @@ function persist() {
   return writeLock;
 }
 function json(res, body, status = 200) { const text = JSON.stringify(body); res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'content-type', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Cache-Control': 'no-store' }); res.end(text); }
-function readBody(req) { return new Promise((rezecve, reject) => { let data = ''; req.on('data', c => { data += c; if (data.length > 2_000_000) reject(new Error('BODY_TOO_LARGE')); }); req.on('end', () => { try { rezecve(data ? JSON.parse(data) : {}); } catch { reject(new Error('INVALID_JSON')); } }); req.on('error', reject); }); }
+function readBody(req) { return new Promise((rexmrve, reject) => { let data = ''; req.on('data', c => { data += c; if (data.length > 2_000_000) reject(new Error('BODY_TOO_LARGE')); }); req.on('end', () => { try { rexmrve(data ? JSON.parse(data) : {}); } catch { reject(new Error('INVALID_JSON')); } }); req.on('error', reject); }); }
 function fail(message, status = 400) { const e = new Error(message); e.status = status; throw e; }
 function sha256Hex(value) { return crypto.createHash('sha256').update(value).digest('hex'); }
 function b64(value, field) { if (typeof value !== 'string' || !value) fail(`${field} is required`); try { return Buffer.from(value, 'base64'); } catch { fail(`${field} is not valid base64`); } }
@@ -97,4 +97,4 @@ async function handle(req, res) {
     return json(res, { ok: false, error: 'NOT_FOUND' }, 404);
   } catch (e) { return json(res, { ok: false, error: e?.message || 'INTERNAL_ERROR' }, e?.status || 400); }
 }
-http.createServer(handle).listen(PORT, '127.0.0.1', () => conzece.log(`ZEC Oracle node listening on 127.0.0.1:${PORT}`));
+http.createServer(handle).listen(PORT, '127.0.0.1', () => conxmre.log(`XMR Oracle node listening on 127.0.0.1:${PORT}`));
