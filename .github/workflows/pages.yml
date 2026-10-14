@@ -1,4 +1,4 @@
-name: Deploy SOL GitHub Pages
+name: Deploy ZEC GitHub Pages
 on:
   push:
     branches: [main]

@@ -1,5 +1,5 @@
 {
-  "name": "sol-oracle-node",
+  "name": "zec-oracle-node",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
